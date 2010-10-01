@@ -1,0 +1,27 @@
+<configure 
+    xmlns="http://namespaces.zope.org/zope"     
+    xmlns:browser="http://namespaces.zope.org/browser" 
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup" 
+    i18n_domain="collective.js.extjs">
+
+    <five:registerPackage package="." />
+
+    <genericsetup:registerProfile 
+        name="default" 
+        title="collective.js.extjs"
+        directory="profiles/default" 
+        description="extjs framework
+                     "
+        provides="Products.GenericSetup.interfaces.EXTENSION" 
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot" />
+
+    <browser:resourceDirectory
+        name="collective.js.extjs-resources"
+        directory="resources" />
+
+    <browser:resource
+        name="ext-jquery-adapter.js"
+        file="adapter/jquery/ext-jquery-adapter.js" />
+
+</configure>
