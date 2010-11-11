@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0'
+version = open('collective/js/extjs/version.txt').read().strip()
 
 setup(name='collective.js.extjs',
       version=version,
