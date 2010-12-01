@@ -5,6 +5,9 @@ Changelog
 1.0b2
 -----
 
+* Added missing GridDragDropRowOrder.js to registry
+  [jbaumann]
+
 
 1.0a4
 -----
@@ -17,12 +20,12 @@ Changelog
 1.0a2
 -----
 
-* removed global css definitions, font-family settings 
+* removed global css definitions, font-family settings
   [fsprenger, 18.11.2010]
- 
+
 * fixed bug with hovering in the menus
   [fsprenger, 18.11.2010]
- 
+
 * replaced relative paths with resource directory
   [fsprenger, 18.11.2010]
 
