@@ -1,15 +1,17 @@
 /*!
- * Ext JS Library 3.2.1
- * Copyright(c) 2006-2010 Ext JS, Inc.
- * licensing@extjs.com
- * http://www.extjs.com/license
+ * Ext JS Library 3.4.0
+ * Copyright(c) 2006-2011 Sencha Inc.
+ * licensing@sencha.com
+ * http://www.sencha.com/license
  */
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}img,body,html{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul {list-style:none;}caption,th {text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;}q:before,q:after{content:'';}
 
-/* 
-XXX: commenting out all the generic style definitions since they may (and will) interfere with our skin. 
-Needs some testing if extjs still looks ok.
-*/
-/*html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}img,body,html{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}ol,ul {list-style:none;}caption,th {text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;}q:before,q:after{content:'';}.ext-el-mask {
+.ext-forced-border-box, .ext-forced-border-box * {
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.ext-el-mask {
     z-index: 100;
     position: absolute;
     top:0;
@@ -20,7 +22,7 @@ Needs some testing if extjs still looks ok.
     width: 100%;
     height: 100%;
     zoom: 1;
-}*/
+}
 
 .ext-el-mask-msg {
     z-index: 20001;
@@ -71,6 +73,16 @@ Needs some testing if extjs still looks ok.
 
 .x-hide-display {
     display:none !important;
+}
+
+.x-hide-nosize,
+.x-hide-nosize *    /* Emulate display:none for children */
+ {
+   height:0px!important;
+   width:0px!important;
+   visibility:hidden!important;
+   border:none!important;
+   zoom:1;
 }
 
 .x-hide-visibility {
@@ -229,7 +241,7 @@ Needs some testing if extjs still looks ok.
 .x-shadow .xsmc {
     float: left;
     height: 100%;
-    background: transparent;
+    background-color: transparent;
 }
 
 .x-shadow .xst, .x-shadow .xsb {
@@ -292,7 +304,7 @@ Needs some testing if extjs still looks ok.
     position: absolute;
     left: 0;
     top: 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/s.gif);
+    background-image:url(../images/default/s.gif);
     z-index: 20000;
 }
 
@@ -647,17 +659,22 @@ ul.x-tab-strip li.x-tab-edge {
 /*
  * Horrible hack for IE8 in quirks mode
  */
-.ext-ie8 ul.x-tab-strip li {
+.ext-ie8 .x-tab-strip li {
     position: relative;
 }
-.ext-ie8 .x-tab-strip .x-tab-right{
-    margin-bottom: 0 !important;
+.ext-border-box .ext-ie8 .x-tab-strip-top .x-tab-right {
     top: 1px;
 }
-.ext-ie8 ul.x-tab-strip-top {
+.ext-ie8 .x-tab-strip-top {
+    padding-top: 1;
+}
+.ext-border-box .ext-ie8 .x-tab-strip-top {
     padding-top: 0;
 }
 .ext-ie8 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
+    top:3px;
+}
+.ext-border-box .ext-ie8 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
     top:4px;
 }
 .ext-ie8 .x-tab-strip-bottom .x-tab-right{
@@ -889,6 +906,26 @@ textarea.x-form-field {
     line-height:18px;
 }
 
+.x-quirks .ext-ie9 .x-form-text {
+    height: 22px;
+    padding-top: 3px;
+    padding-bottom: 0px;
+}
+
+/* Ugly hacks for the bogus 1px margin bug in IE9 quirks */
+.x-quirks .ext-ie9 .x-input-wrapper .x-form-text,
+.x-quirks .ext-ie9 .x-form-field-trigger-wrap .x-form-text {
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+.x-quirks .ext-ie9 .x-input-wrapper .x-form-element {
+    margin-bottom: -1px;
+}
+
+.ext-ie6 .x-form-field-wrap .x-form-file-btn, .ext-ie7 .x-form-field-wrap .x-form-file-btn {
+    top: -1px; /* because of all these margin hacks, these buttons are off by one pixel in IE6,7 */
+}
+
 .ext-ie6 textarea.x-form-field, .ext-ie7 textarea.x-form-field {
     margin:-1px 0; /* ie bogus margin bug */
 }
@@ -901,9 +938,11 @@ textarea.x-form-field {
     margin-bottom:-2px; /* another bogus margin bug, safari/mac only */
 }
 
+/*
 .ext-strict .ext-ie8 .x-form-text, .ext-strict .ext-ie8 textarea.x-form-field {
     margin-bottom: 1px;
 }
+*/
 
 .ext-gecko .x-form-text , .ext-ie8 .x-form-text {
     padding-top:2px; /* FF won't center the text vertically */
@@ -1175,6 +1214,10 @@ textarea {
 
 .ext-webkit .x-small-editor .x-form-text{padding-top:3px;font-size:100%;}
 
+.ext-strict .ext-webkit .x-small-editor .x-form-text{
+    height:14px !important;
+}
+
 .x-form-clear {
     clear:both;
     height:0;
@@ -1318,6 +1361,10 @@ textarea {
     margin-bottom:10px;
 }
 
+.ext-strict .ext-ie9 .x-fieldset legend.x-fieldset-header {
+    padding-top: 1px;
+}
+
 .ext-ie .x-fieldset {
     padding-top: 0;
     padding-bottom:10px;
@@ -1385,6 +1432,10 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
     overflow: auto;
 }
 
+.ext-mac.ext-gecko .x-window-body .x-form-item {
+    overflow:hidden;
+}
+
 .ext-gecko .x-form-item {
     -moz-outline: none;
     outline: none;
@@ -1421,7 +1472,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
 
 .x-btn button{
     border:0 none;
-    background:transparent;
+    background-color:transparent;
     padding-left:3px;
     padding-right:3px;
     cursor:pointer;
@@ -1753,7 +1804,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
 /* height adjustment class */
 .x-btn-as-arrow .x-btn-mc em {
     display:block;
-    background:transparent;
+    background-color:transparent;
 	padding-bottom:14px;
 }
 
@@ -1812,7 +1863,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
 }
 
 .x-btn-group-mc .x-btn-group-body {
-    background:transparent;
+    background-color:transparent;
     border: 0 none;
 }
 
@@ -2037,7 +2088,7 @@ fieldset.x-panel-collapsed .x-fieldset-bwrap {
 
 .x-toolbar-more em.x-btn-arrow {
     display:inline;
-    background:transparent;
+    background-color:transparent;
 	padding-right:0;
 }
 
@@ -2157,6 +2208,16 @@ div.x-toolbar-no-items {
 	text-overflow: ellipsis;
     padding:3px 3px 3px 5px;
     white-space: nowrap;
+}
+
+/* ActionColumn, reduce padding to accommodate 16x16 icons in normal row height */
+.x-action-col-cell .x-grid3-cell-inner {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.x-action-col-icon {
+    cursor: pointer;
 }
 
 .x-grid3-hd-inner {
@@ -2436,7 +2497,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-grid3-col-dd {
     border:0 none;
     padding:0;
-    background:transparent;
+    background-color:transparent;
 }
 
 .x-dd-drag-ghost .x-grid3-dd-wrap {
@@ -2664,7 +2725,65 @@ a.x-grid3-hd-btn:hover {
     padding-right:0;
     border-right:1px solid;
 }
-.x-dd-drag-proxy{
+.x-pivotgrid .x-grid3-header-offset table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.x-pivotgrid .x-grid3-header-offset table td {
+    padding: 4px 3px 4px 5px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    line-height: 13px;
+    font-family: tahoma;
+}
+
+.x-pivotgrid .x-grid3-row-headers {
+    display: block;
+    float: left;
+}
+
+.x-pivotgrid .x-grid3-row-headers table {
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.x-pivotgrid .x-grid3-row-headers table td {
+    height: 18px;
+    padding: 2px 7px 0 0;
+    text-align: right;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    font-family: tahoma;
+}
+
+.ext-gecko .x-pivotgrid .x-grid3-row-headers table td {
+    height: 21px;
+}
+
+.x-grid3-header-title {
+    top: 0%;
+    left: 0%;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    font-family: tahoma;
+    font-size: 11px;
+    padding: auto 1px;
+    display: table-cell;
+}
+
+.x-grid3-header-title span {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 100%;
+    margin-top: -6px;
+}.x-dd-drag-proxy{
 	position:absolute;
 	left:0;
     top:0;
@@ -2789,20 +2908,20 @@ input.x-tree-node-cb {
 
 /* No line styles */
 .x-tree-no-lines .x-tree-elbow{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-no-lines .x-tree-elbow-end{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-no-lines .x-tree-elbow-line{
-	background:transparent;
+	background-color:transparent;
 }
 
 /* Arrows */
 .x-tree-arrows .x-tree-elbow{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-arrows .x-tree-elbow-plus{
@@ -2814,7 +2933,7 @@ input.x-tree-node-cb {
 }
 
 .x-tree-arrows .x-tree-elbow-end{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-arrows .x-tree-elbow-end-plus{
@@ -2826,7 +2945,7 @@ input.x-tree-node-cb {
 }
 
 .x-tree-arrows .x-tree-elbow-line{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-arrows .x-tree-ec-over .x-tree-elbow-plus{
@@ -2887,7 +3006,7 @@ input.x-tree-node-cb {
 }
 
 .x-tree-node .x-tree-node-inline-icon{
-	background:transparent;
+	background-color:transparent;
 }
 
 .x-tree-node a:hover, .x-dd-drag-ghost a:hover{
@@ -3112,7 +3231,7 @@ table.x-date-inner {
 
 .x-date-mp td {
     padding:2px;
-	
+	font:normal 11px arial, helvetica,tahoma,sans-serif;
 }
 
 td.x-date-mp-month,td.x-date-mp-year,td.x-date-mp-ybtn {
@@ -3361,7 +3480,7 @@ td.x-date-mp-sep {
 
 .x-menu-list{
     padding: 2px;
-	background:transparent;
+	background-color:transparent;
 	border:0 none;
     overflow:hidden;
     overflow-y: hidden;
@@ -3384,7 +3503,6 @@ td.x-date-mp-sep {
     white-space: nowrap;
 	display:block;
 	padding:1px;
-	margin-bottom: 0;
 }
 
 .x-menu-item{
@@ -3484,7 +3602,7 @@ a.x-menu-item {
 }
 
 .x-menu-group-item .x-menu-item-icon{
-	background: transparent;
+	background-color: transparent;
 }
 
 .x-menu-item-checked .x-menu-group-item .x-menu-item-icon{
@@ -3527,6 +3645,13 @@ a.x-menu-item {
 }
 .ext-strict .ext-ie6 .x-menu-sep {
     margin: 0;
+    height: 1px;
+}
+
+/*
+ * Fixes an issue with "fat" separators in webkit
+ */
+.ext-webkit .x-menu-sep{
     height: 1px;
 }
 
@@ -3728,7 +3853,7 @@ a.x-menu-item {
 .x-panel-tl .x-panel-header {
     padding:5px 0 4px 0;
     border:0 none;
-    background:transparent;
+    background:transparent no-repeat;
 }
 
 .x-panel-tl .x-panel-icon, .x-window-tl .x-panel-icon {
@@ -3801,7 +3926,7 @@ a.x-menu-item {
 }
 
 .x-panel-mc .x-panel-body {
-    background:transparent;
+    background-color:transparent;
     border: 0 none;
 }
 
@@ -3939,6 +4064,22 @@ a.x-menu-item {
     background-position:-15px -90px;
 }
 
+.x-tool-prev {
+    background-position:0 -105px;
+}
+
+.x-tool-prev-over {
+    background-position:-15px -105px;
+}
+
+.x-tool-next {
+    background-position:0 -120px;
+}
+
+.x-tool-next-over {
+    background-position:-15px -120px;
+}
+
 .x-tool-pin {
     background-position:0 -135px;
 }
@@ -3971,20 +4112,20 @@ a.x-menu-item {
     background-position:-15px -180px;
 }
 
-.x-tool-up {
-    background-position:0 -210px;
-}
-
-.x-tool-up-over {
-    background-position:-15px -210px;
-}
-
 .x-tool-down {
     background-position:0 -195px;
 }
 
 .x-tool-down-over {
     background-position:-15px -195px;
+}
+
+.x-tool-up {
+    background-position:0 -210px;
+}
+
+.x-tool-up-over {
+    background-position:-15px -210px;
 }
 
 .x-tool-refresh {
@@ -3995,20 +4136,20 @@ a.x-menu-item {
     background-position:-15px -225px;
 }
 
-.x-tool-minus {
-    background-position:0 -255px;
-}
-
-.x-tool-minus-over {
-    background-position:-15px -255px;
-}
-
 .x-tool-plus {
     background-position:0 -240px;
 }
 
 .x-tool-plus-over {
     background-position:-15px -240px;
+}
+
+.x-tool-minus {
+    background-position:0 -255px;
+}
+
+.x-tool-minus-over {
+    background-position:-15px -255px;
 }
 
 .x-tool-search {
@@ -4041,6 +4182,38 @@ a.x-menu-item {
 
 .x-tool-print-over {
     background-position:-15px -315px;
+}
+
+.x-tool-expand {
+    background-position:0 -330px;
+}
+
+.x-tool-expand-over {
+    background-position:-15px -330px;
+}
+
+.x-tool-collapse {
+    background-position:0 -345px;
+}
+
+.x-tool-collapse-over {
+    background-position:-15px -345px;
+}
+
+.x-tool-resize {
+    background-position:0 -360px;
+}
+
+.x-tool-resize-over {
+    background-position:-15px -360px;
+}
+
+.x-tool-move {
+    background-position:0 -375px;
+}
+
+.x-tool-move-over {
+    background-position:-15px -375px;
 }
 
 /* Ghosting */
@@ -4396,7 +4569,7 @@ a.x-menu-item {
 }
 
 .x-window-body {
-    background:transparent;
+    background-color:transparent;
 }
 
 .x-panel-ghost .x-window-tl {
@@ -4471,72 +4644,72 @@ body.ext-ie6.x-body-masked .x-window select {
 
 .x-html-editor-tb .x-edit-bold, .x-menu-item img.x-edit-bold {
     background-position:0 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);    
+    background-image:url(../images/default/editor/tb-sprite.gif);    
 }
 
 .x-html-editor-tb .x-edit-italic, .x-menu-item img.x-edit-italic {
     background-position:-16px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-underline, .x-menu-item img.x-edit-underline {
     background-position:-32px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-forecolor, .x-menu-item img.x-edit-forecolor {
     background-position:-160px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-backcolor, .x-menu-item img.x-edit-backcolor {
     background-position:-176px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-justifyleft, .x-menu-item img.x-edit-justifyleft {
     background-position:-112px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-justifycenter, .x-menu-item img.x-edit-justifycenter {
     background-position:-128px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-justifyright, .x-menu-item img.x-edit-justifyright {
     background-position:-144px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-insertorderedlist, .x-menu-item img.x-edit-insertorderedlist {
     background-position:-80px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-insertunorderedlist, .x-menu-item img.x-edit-insertunorderedlist {
     background-position:-96px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-increasefontsize, .x-menu-item img.x-edit-increasefontsize {
     background-position:-48px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-decreasefontsize, .x-menu-item img.x-edit-decreasefontsize {
     background-position:-64px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-sourceedit, .x-menu-item img.x-edit-sourceedit {
     background-position:-192px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tb .x-edit-createlink, .x-menu-item img.x-edit-createlink {
     background-position:-208px 0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }
 
 .x-html-editor-tip .x-tip-bd .x-tip-bd-inner {
@@ -4673,7 +4846,7 @@ body.ext-ie6.x-body-masked .x-window select {
 
 .x-tool-expand-east, .x-tool-expand-west {
     float:none;
-    margin:3px auto;
+    margin:3px 2px;
 }
 
 .x-accordion-hd .x-tool-toggle {
@@ -4746,12 +4919,12 @@ body.ext-ie6.x-body-masked .x-window select {
 }
 
 .x-layout-split-h{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/s.gif);
+    background-image:url(../images/default/s.gif);
     background-position: left;
 }
 
 .x-layout-split-v{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/s.gif);
+    background-image:url(../images/default/s.gif);
     background-position: top;
 }
 
@@ -4837,14 +5010,14 @@ body.ext-ie6.x-body-masked .x-window select {
     border:0 none;
     width:5px !important;
     padding:0;
-    background:transparent;
+    background-color:transparent;
 }
 
 .x-layout-cmini-north, .x-layout-cmini-south {
     border:0 none;
     height:5px !important;
     padding:0;
-    background:transparent;
+    background-color:transparent;
 }
 
 .x-viewport, .x-viewport body {
@@ -5139,12 +5312,9 @@ body.ext-ie6.x-body-masked .x-window select {
     height:32px;
 }
 
-.ext-ie .x-window-dlg .ext-mb-icon {
-    width:44px; /* 3px IE margin issue */
-}
-
 .x-window-dlg .x-dlg-icon .ext-mb-content{
-    zoom: 1; margin-left: 47px;
+    zoom: 1; 
+    margin-left: 47px;
 }
 
 .x-window-dlg .ext-mb-info, .x-window-dlg .ext-mb-warning, .x-window-dlg .ext-mb-question, .x-window-dlg .ext-mb-error {
@@ -5160,18 +5330,18 @@ body.ext-ie6.x-body-masked .x-window select {
 .ext-el-mask-msg {
     border-color:#6593cf;
     background-color:#c3daf9;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/box/tb-blue.gif);
+    background-image:url(../images/default/box/tb-blue.gif);
 }
 .ext-el-mask-msg div {
     background-color: #eee;
     border-color:#a3bad9;
     color:#222;
-    
+    font:normal 11px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-mask-loading div {
     background-color:#fbfbfb;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/loading.gif);
+    background-image:url(../images/default/grid/loading.gif);
 }
 
 .x-item-disabled {
@@ -5195,9 +5365,11 @@ body.ext-ie6.x-body-masked .x-window select {
     background-color: #deecfd;
 }
 
+/*
 .x-color-palette em:hover, .x-color-palette span:hover{   
     background-color: #deecfd;
 }
+*/
 
 .x-color-palette em {
     border-color:#aca899;
@@ -5208,20 +5380,20 @@ body.ext-ie6.x-body-masked .x-window select {
 }
 
 .x-shadow .xsmc {
-    background-image: url(++resource++collective.js.extjs-resources/images/default/shadow-c.png);
+    background-image: url(../images/default/shadow-c.png);
 }
 
 .x-shadow .xsml, .x-shadow .xsmr {
-    background-image: url(++resource++collective.js.extjs-resources/images/default/shadow-lr.png);
+    background-image: url(../images/default/shadow-lr.png);
 }
 
 .x-shadow .xstl, .x-shadow .xstc,  .x-shadow .xstr, .x-shadow .xsbl, .x-shadow .xsbc, .x-shadow .xsbr{
-    background-image: url(++resource++collective.js.extjs-resources/images/default/shadow.png);
+    background-image: url(../images/default/shadow.png);
 }
 
 .loading-indicator {
     font-size: 11px;
-    background-image: url(++resource++collective.js.extjs-resources/images/default/grid/loading.gif);
+    background-image: url(../images/default/grid/loading.gif);
 }
 
 .x-spotlight {
@@ -5240,13 +5412,13 @@ body.ext-ie6.x-body-masked .x-window select {
 
 ul.x-tab-strip-top{
     background-color:#cedff5;
-	background-image: url(++resource++collective.js.extjs-resources/images/default/tabs/tab-strip-bg.gif);
+	background-image: url(../images/default/tabs/tab-strip-bg.gif);
 	border-bottom-color:#8db2e3;
 }
 
 ul.x-tab-strip-bottom{
     background-color:#cedff5;
-	background-image: url(++resource++collective.js.extjs-resources/images/default/tabs/tab-strip-btm-bg.gif);
+	background-image: url(../images/default/tabs/tab-strip-btm-bg.gif);
 	border-top-color:#8db2e3;
 }
 
@@ -5257,7 +5429,7 @@ ul.x-tab-strip-bottom{
 }
 
 .x-tab-strip span.x-tab-strip-text {
-	
+	font:normal 11px tahoma,arial,helvetica;
 	color:#416aa3;
 }
 
@@ -5275,39 +5447,39 @@ ul.x-tab-strip-bottom{
 }
 
 .x-tab-strip-top .x-tab-right, .x-tab-strip-top .x-tab-left, .x-tab-strip-top .x-tab-strip-inner{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/tabs/tabs-sprite.gif);
+	background-image: url(../images/default/tabs/tabs-sprite.gif);
 }
 
 .x-tab-strip-bottom .x-tab-right {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/tabs/tab-btm-inactive-right-bg.gif);
+	background-image: url(../images/default/tabs/tab-btm-inactive-right-bg.gif);
 }
 
 .x-tab-strip-bottom .x-tab-left {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/tabs/tab-btm-inactive-left-bg.gif);
+	background-image: url(../images/default/tabs/tab-btm-inactive-left-bg.gif);
 }
 
 .x-tab-strip-bottom .x-tab-strip-over .x-tab-right {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/tabs/tab-btm-over-right-bg.gif);
+	background-image: url(../images/default/tabs/tab-btm-over-right-bg.gif);
 }
 
 .x-tab-strip-bottom .x-tab-strip-over .x-tab-left {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/tabs/tab-btm-over-left-bg.gif);
+	background-image: url(../images/default/tabs/tab-btm-over-left-bg.gif);
 }
 
 .x-tab-strip-bottom .x-tab-strip-active .x-tab-right {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/tabs/tab-btm-right-bg.gif);
+	background-image: url(../images/default/tabs/tab-btm-right-bg.gif);
 }
 
 .x-tab-strip-bottom .x-tab-strip-active .x-tab-left {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/tabs/tab-btm-left-bg.gif);
+	background-image: url(../images/default/tabs/tab-btm-left-bg.gif);
 }
 
 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close {
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tabs/tab-close.gif);
+	background-image:url(../images/default/tabs/tab-close.gif);
 }
 
 .x-tab-strip .x-tab-strip-closable a.x-tab-strip-close:hover{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tabs/tab-close.gif);
+	background-image:url(../images/default/tabs/tab-close.gif);
 }
 
 .x-tab-panel-body {
@@ -5324,7 +5496,7 @@ ul.x-tab-strip-bottom{
 }
 
 .x-tab-scroller-left {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/tabs/scroll-left.gif);
+    background-image:url(../images/default/tabs/scroll-left.gif);
     border-bottom-color:#8db2e3;
 }
 
@@ -5341,17 +5513,19 @@ ul.x-tab-strip-bottom{
 }
 
 .x-tab-scroller-right {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/tabs/scroll-right.gif);
+    background-image:url(../images/default/tabs/scroll-right.gif);
     border-bottom-color:#8db2e3;
 }
 
 .x-tab-panel-bbar .x-toolbar, .x-tab-panel-tbar .x-toolbar {
     border-color:#99bbe8;
+}.x-form-field {
+    font:normal 12px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-form-text, textarea.x-form-field {
     background-color:#fff;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/form/text-bg.gif);
+    background-image:url(../images/default/form/text-bg.gif);
     border-color:#b5b8c8;
 }
 
@@ -5370,20 +5544,20 @@ ul.x-tab-strip-bottom{
 }
 
 .x-form-field-wrap .x-form-trigger {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/form/trigger.gif);
+    background-image:url(../images/default/form/trigger.gif);
     border-bottom-color:#b5b8c8;
 }
 
 .x-form-field-wrap .x-form-date-trigger {
-    background-image: url(++resource++collective.js.extjs-resources/images/default/form/date-trigger.gif);
+    background-image: url(../images/default/form/date-trigger.gif);
 }
 
 .x-form-field-wrap .x-form-clear-trigger {
-    background-image: url(++resource++collective.js.extjs-resources/images/default/form/clear-trigger.gif);
+    background-image: url(../images/default/form/clear-trigger.gif);
 }
 
 .x-form-field-wrap .x-form-search-trigger {
-    background-image: url(++resource++collective.js.extjs-resources/images/default/form/search-trigger.gif);
+    background-image: url(../images/default/form/search-trigger.gif);
 }
 
 .x-trigger-wrap-focus .x-form-trigger {
@@ -5404,7 +5578,7 @@ ul.x-tab-strip-bottom{
 
 .x-form-invalid, textarea.x-form-invalid {
     background-color:#fff;
-	background-image:url(++resource++collective.js.extjs-resources/images/default/grid/invalid_line.gif);
+	background-image:url(../images/default/grid/invalid_line.gif);
 	border-color:#c30;
 }
 
@@ -5415,27 +5589,43 @@ ul.x-tab-strip-bottom{
 
 .x-form-invalid.x-form-composite .x-form-invalid {
     background-color:#fff;
-	background-image:url(++resource++collective.js.extjs-resources/images/default/grid/invalid_line.gif);
+	background-image:url(../images/default/grid/invalid_line.gif);
 	border-color:#c30;
 }
 
 .x-form-inner-invalid, textarea.x-form-inner-invalid {
     background-color:#fff;
-	background-image:url(++resource++collective.js.extjs-resources/images/default/grid/invalid_line.gif);
+	background-image:url(../images/default/grid/invalid_line.gif);
+}
+
+.x-form-grow-sizer {
+	font:normal 12px tahoma, arial, helvetica, sans-serif;
+}
+
+.x-form-item {
+    font:normal 12px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-form-invalid-msg {
     color:#c0272b;
-    
-    background-image:url(++resource++collective.js.extjs-resources/images/default/shared/warning.gif);
+    font:normal 11px tahoma, arial, helvetica, sans-serif;
+    background-image:url(../images/default/shared/warning.gif);
 }
 
 .x-form-empty-field {
     color:gray;
 }
 
+.x-small-editor .x-form-field {
+    font:normal 11px arial, tahoma, helvetica, sans-serif;
+}
+
+.ext-webkit .x-small-editor .x-form-field {
+    font:normal 11px arial, tahoma, helvetica, sans-serif;
+}
+
 .x-form-invalid-icon {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/form/exclamation.gif);
+    background-image:url(../images/default/form/exclamation.gif);
 }
 
 .x-fieldset {
@@ -5443,15 +5633,15 @@ ul.x-tab-strip-bottom{
 }
 
 .x-fieldset legend {
-    
+    font:bold 11px tahoma, arial, helvetica, sans-serif;
     color:#15428b;
 }
 .x-btn{
-	
+	font:normal 11px tahoma, verdana, helvetica;
 }
 
 .x-btn button{
-    
+    font:normal 11px arial,tahoma,verdana,helvetica;
     color:#333;
 }
 
@@ -5461,7 +5651,7 @@ ul.x-tab-strip-bottom{
 }
 
 .x-btn-tl, .x-btn-tr, .x-btn-tc, .x-btn-ml, .x-btn-mr, .x-btn-mc, .x-btn-bl, .x-btn-br, .x-btn-bc{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/button/btn.gif);
+	background-image:url(../images/default/button/btn.gif);
 }
 
 .x-btn-click .x-btn-text, .x-btn-menu-active .x-btn-text, .x-btn-pressed .x-btn-text{
@@ -5473,27 +5663,27 @@ ul.x-tab-strip-bottom{
 }
 
 .x-btn-mc em.x-btn-arrow {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/button/arrow.gif);
+    background-image:url(../images/default/button/arrow.gif);
 }
 
 .x-btn-mc em.x-btn-split {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/button/s-arrow.gif);
+    background-image:url(../images/default/button/s-arrow.gif);
 }
 
 .x-btn-over .x-btn-mc em.x-btn-split, .x-btn-click .x-btn-mc em.x-btn-split, .x-btn-menu-active .x-btn-mc em.x-btn-split, .x-btn-pressed .x-btn-mc em.x-btn-split {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/button/s-arrow-o.gif);
+    background-image:url(../images/default/button/s-arrow-o.gif);
 }
 
 .x-btn-mc em.x-btn-arrow-bottom {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/button/s-arrow-b-noline.gif);
+    background-image:url(../images/default/button/s-arrow-b-noline.gif);
 }
 
 .x-btn-mc em.x-btn-split-bottom {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/button/s-arrow-b.gif);
+    background-image:url(../images/default/button/s-arrow-b.gif);
 }
 
 .x-btn-over .x-btn-mc em.x-btn-split-bottom, .x-btn-click .x-btn-mc em.x-btn-split-bottom, .x-btn-menu-active .x-btn-mc em.x-btn-split-bottom, .x-btn-pressed .x-btn-mc em.x-btn-split-bottom {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/button/s-arrow-bo.gif);
+    background-image:url(../images/default/button/s-arrow-bo.gif);
 }
 
 .x-btn-group-header {
@@ -5501,42 +5691,46 @@ ul.x-tab-strip-bottom{
 }
 
 .x-btn-group-tc {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/button/group-tb.gif);
+	background-image: url(../images/default/button/group-tb.gif);
 }
 
 .x-btn-group-tl {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/button/group-cs.gif);
+	background-image: url(../images/default/button/group-cs.gif);
 }
 
 .x-btn-group-tr {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/button/group-cs.gif);
+	background-image: url(../images/default/button/group-cs.gif);
 }
 
 .x-btn-group-bc {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/button/group-tb.gif);
+	background-image: url(../images/default/button/group-tb.gif);
 }
 
 .x-btn-group-bl {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/button/group-cs.gif);
+	background-image: url(../images/default/button/group-cs.gif);
 }
 
 .x-btn-group-br {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/button/group-cs.gif);
+	background-image: url(../images/default/button/group-cs.gif);
 }
 
 .x-btn-group-ml {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/button/group-lr.gif);
+	background-image: url(../images/default/button/group-lr.gif);
 }
 .x-btn-group-mr {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/button/group-lr.gif);
+	background-image: url(../images/default/button/group-lr.gif);
 }
 
 .x-btn-group-notitle .x-btn-group-tc {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/button/group-tb.gif);
+	background-image: url(../images/default/button/group-tb.gif);
 }.x-toolbar{
 	border-color:#a9bfd3;
     background-color:#d0def0;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/toolbar/bg.gif);
+    background-image:url(../images/default/toolbar/bg.gif);
+}
+
+.x-toolbar td,.x-toolbar span,.x-toolbar input,.x-toolbar div,.x-toolbar select,.x-toolbar label{
+    font:normal 11px arial,tahoma, helvetica, sans-serif;
 }
 
 .x-toolbar .x-item-disabled {
@@ -5548,67 +5742,67 @@ ul.x-tab-strip-bottom{
 }
 
 .x-toolbar .x-btn-mc em.x-btn-split {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/button/s-arrow-noline.gif);
+    background-image:url(../images/default/button/s-arrow-noline.gif);
 }
 
 .x-toolbar .x-btn-over .x-btn-mc em.x-btn-split, .x-toolbar .x-btn-click .x-btn-mc em.x-btn-split,
 .x-toolbar .x-btn-menu-active .x-btn-mc em.x-btn-split, .x-toolbar .x-btn-pressed .x-btn-mc em.x-btn-split
 {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/button/s-arrow-o.gif);
+    background-image:url(../images/default/button/s-arrow-o.gif);
 }
 
 .x-toolbar .x-btn-mc em.x-btn-split-bottom {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/button/s-arrow-b-noline.gif);
+    background-image:url(../images/default/button/s-arrow-b-noline.gif);
 }
 
 .x-toolbar .x-btn-over .x-btn-mc em.x-btn-split-bottom, .x-toolbar .x-btn-click .x-btn-mc em.x-btn-split-bottom,
 .x-toolbar .x-btn-menu-active .x-btn-mc em.x-btn-split-bottom, .x-toolbar .x-btn-pressed .x-btn-mc em.x-btn-split-bottom
 {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/button/s-arrow-bo.gif);
+    background-image:url(../images/default/button/s-arrow-bo.gif);
 }
 
 .x-toolbar .xtb-sep {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/grid-blue-split.gif);
+	background-image: url(../images/default/grid/grid-blue-split.gif);
 }
 
 .x-tbar-page-first{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/page-first.gif) !important;
+	background-image: url(../images/default/grid/page-first.gif) !important;
 }
 
 .x-tbar-loading{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/refresh.gif) !important;
+	background-image: url(../images/default/grid/refresh.gif) !important;
 }
 
 .x-tbar-page-last{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/page-last.gif) !important;
+	background-image: url(../images/default/grid/page-last.gif) !important;
 }
 
 .x-tbar-page-next{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/page-next.gif) !important;
+	background-image: url(../images/default/grid/page-next.gif) !important;
 }
 
 .x-tbar-page-prev{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/page-prev.gif) !important;
+	background-image: url(../images/default/grid/page-prev.gif) !important;
 }
 
 .x-item-disabled .x-tbar-loading{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/loading.gif) !important;
+	background-image: url(../images/default/grid/refresh-disabled.gif) !important;
 }
 
 .x-item-disabled .x-tbar-page-first{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/page-first-disabled.gif) !important;
+	background-image: url(../images/default/grid/page-first-disabled.gif) !important;
 }
 
 .x-item-disabled .x-tbar-page-last{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/page-last-disabled.gif) !important;
+	background-image: url(../images/default/grid/page-last-disabled.gif) !important;
 }
 
 .x-item-disabled .x-tbar-page-next{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/page-next-disabled.gif) !important;
+	background-image: url(../images/default/grid/page-next-disabled.gif) !important;
 }
 
 .x-item-disabled .x-tbar-page-prev{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/page-prev-disabled.gif) !important;
+	background-image: url(../images/default/grid/page-prev-disabled.gif) !important;
 }
 
 .x-paging-info {
@@ -5616,7 +5810,7 @@ ul.x-tab-strip-bottom{
 }
 
 .x-toolbar-more-icon {
-    background-image: url(++resource++collective.js.extjs-resources/images/default/toolbar/more.gif) !important;
+    background-image: url(../images/default/toolbar/more.gif) !important;
 }.x-resizable-handle {
 	background-color:#fff;
 }
@@ -5624,29 +5818,29 @@ ul.x-tab-strip-bottom{
 .x-resizable-over .x-resizable-handle-east, .x-resizable-pinned .x-resizable-handle-east,
 .x-resizable-over .x-resizable-handle-west, .x-resizable-pinned .x-resizable-handle-west
 {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/sizer/e-handle.gif);
+    background-image:url(../images/default/sizer/e-handle.gif);
 }
 
 .x-resizable-over .x-resizable-handle-south, .x-resizable-pinned .x-resizable-handle-south,
 .x-resizable-over .x-resizable-handle-north, .x-resizable-pinned .x-resizable-handle-north
 {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/sizer/s-handle.gif);
+    background-image:url(../images/default/sizer/s-handle.gif);
 }
 
 .x-resizable-over .x-resizable-handle-north, .x-resizable-pinned .x-resizable-handle-north{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/sizer/s-handle.gif);
+    background-image:url(../images/default/sizer/s-handle.gif);
 }
 .x-resizable-over .x-resizable-handle-southeast, .x-resizable-pinned .x-resizable-handle-southeast{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/sizer/se-handle.gif);
+    background-image:url(../images/default/sizer/se-handle.gif);
 }
 .x-resizable-over .x-resizable-handle-northwest, .x-resizable-pinned .x-resizable-handle-northwest{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/sizer/nw-handle.gif);
+    background-image:url(../images/default/sizer/nw-handle.gif);
 }
 .x-resizable-over .x-resizable-handle-northeast, .x-resizable-pinned .x-resizable-handle-northeast{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/sizer/ne-handle.gif);
+    background-image:url(../images/default/sizer/ne-handle.gif);
 }
 .x-resizable-over .x-resizable-handle-southwest, .x-resizable-pinned .x-resizable-handle-southwest{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/sizer/sw-handle.gif);
+    background-image:url(../images/default/sizer/sw-handle.gif);
 }
 .x-resizable-proxy{
     border-color:#3b5a82;
@@ -5662,6 +5856,15 @@ ul.x-tab-strip-bottom{
     border-color:#99bbe8;
 }
 
+.x-grid3-row td, .x-grid3-summary-row td{
+	font:normal 11px/13px arial, tahoma, helvetica, sans-serif;
+}
+
+.x-grid3-hd-row td {
+	font:normal 11px/15px arial, tahoma, helvetica, sans-serif;
+}
+
+
 .x-grid3-hd-row td {
     border-left-color:#eee;
     border-right-color:#d0d0d0;
@@ -5669,7 +5872,7 @@ ul.x-tab-strip-bottom{
 
 .x-grid-row-loading {
     background-color: #fff;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/shared/loading-balls.gif);
+    background-image:url(../images/default/shared/loading-balls.gif);
 }
 
 .x-grid3-row {
@@ -5684,7 +5887,7 @@ ul.x-tab-strip-bottom{
 .x-grid3-row-over {
 	border-color:#ddd;
     background-color:#efefef;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/row-over.gif);
+    background-image:url(../images/default/grid/row-over.gif);
 }
 
 .x-grid3-resize-proxy {
@@ -5697,7 +5900,7 @@ ul.x-tab-strip-bottom{
 
 .x-grid3-header{
     background-color:#f9f9f9;
-	background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid3-hrow.gif);
+	background-image:url(../images/default/grid/grid3-hrow.gif);
 }
 
 .x-grid3-header-pop {
@@ -5706,7 +5909,7 @@ ul.x-tab-strip-bottom{
 
 .x-grid3-header-pop-inner {
     border-left-color:#eee;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/hd-pop.gif);
+    background-image:url(../images/default/grid/hd-pop.gif);
 }
 
 td.x-grid3-hd-over, td.sort-desc, td.sort-asc, td.x-grid3-hd-menu-open {
@@ -5716,16 +5919,16 @@ td.x-grid3-hd-over, td.sort-desc, td.sort-asc, td.x-grid3-hd-menu-open {
 
 td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-asc .x-grid3-hd-inner, td.x-grid3-hd-menu-open .x-grid3-hd-inner {
     background-color:#ebf3fd;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid3-hrow-over.gif);
+    background-image:url(../images/default/grid/grid3-hrow-over.gif);
 
 }
 
 .sort-asc .x-grid3-sort-icon {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/sort_asc.gif);
+	background-image: url(../images/default/grid/sort_asc.gif);
 }
 
 .sort-desc .x-grid3-sort-icon {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/sort_desc.gif);
+	background-image: url(../images/default/grid/sort_desc.gif);
 }
 
 .x-grid3-cell-text, .x-grid3-hd-text {
@@ -5733,7 +5936,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-grid3-split {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/grid-split.gif);
+	background-image: url(../images/default/grid/grid-split.gif);
 }
 
 .x-grid3-hd-text {
@@ -5742,16 +5945,20 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-dd-drag-proxy .x-grid3-hd-inner{
     background-color:#ebf3fd;
-	background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid3-hrow-over.gif);
+	background-image:url(../images/default/grid/grid3-hrow-over.gif);
 	border-color:#aaccf6;
 }
 
 .col-move-top{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/grid/col-move-top.gif);
+	background-image:url(../images/default/grid/col-move-top.gif);
 }
 
 .col-move-bottom{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/grid/col-move-bottom.gif);
+	background-image:url(../images/default/grid/col-move-bottom.gif);
+}
+
+td.grid-hd-group-cell {
+    background: url(../images/default/grid/grid3-hrow.gif) repeat-x bottom;
 }
 
 .x-grid3-row-selected {
@@ -5775,7 +5982,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-grid3-locked td.x-grid3-row-marker, .x-grid3-locked .x-grid3-row-selected td.x-grid3-row-marker{
     background-color:#ebeadb !important;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid-hrow.gif) !important;
+    background-image:url(../images/default/grid/grid-hrow.gif) !important;
     color:#000;
     border-top-color:#fff;
     border-right-color:#6fa0df !important;
@@ -5786,11 +5993,11 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-grid3-dirty-cell {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/dirty.gif);
+    background-image:url(../images/default/grid/dirty.gif);
 }
 
 .x-grid3-topbar, .x-grid3-bottombar{
-	
+	font:normal 11px arial, tahoma, helvetica, sans-serif;
 }
 
 .x-grid3-bottombar .x-toolbar{
@@ -5798,7 +6005,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-props-grid .x-grid3-td-name .x-grid3-cell-inner{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid3-special-col-bg.gif) !important;
+	background-image:url(../images/default/grid/grid3-special-col-bg.gif) !important;
     color:#000 !important;
 }
 
@@ -5808,44 +6015,44 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .xg-hmenu-sort-asc .x-menu-item-icon{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/hmenu-asc.gif);
+	background-image: url(../images/default/grid/hmenu-asc.gif);
 }
 
 .xg-hmenu-sort-desc .x-menu-item-icon{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/hmenu-desc.gif);
+	background-image: url(../images/default/grid/hmenu-desc.gif);
 }
 
 .xg-hmenu-lock .x-menu-item-icon{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/hmenu-lock.gif);
+	background-image: url(../images/default/grid/hmenu-lock.gif);
 }
 
 .xg-hmenu-unlock .x-menu-item-icon{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/grid/hmenu-unlock.gif);
+	background-image: url(../images/default/grid/hmenu-unlock.gif);
 }
 
 .x-grid3-hd-btn {
     background-color:#c3daf9;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid3-hd-btn.gif);
+    background-image:url(../images/default/grid/grid3-hd-btn.gif);
 }
 
 .x-grid3-body .x-grid3-td-expander {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid3-special-col-bg.gif);
+    background-image:url(../images/default/grid/grid3-special-col-bg.gif);
 }
 
 .x-grid3-row-expander {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/row-expand-sprite.gif);
+    background-image:url(../images/default/grid/row-expand-sprite.gif);
 }
 
 .x-grid3-body .x-grid3-td-checker {
-    background-image: url(++resource++collective.js.extjs-resources/images/default/grid/grid3-special-col-bg.gif);
+    background-image: url(../images/default/grid/grid3-special-col-bg.gif);
 }
 
 .x-grid3-row-checker, .x-grid3-hd-checker {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/row-check-sprite.gif);
+    background-image:url(../images/default/grid/row-check-sprite.gif);
 }
 
 .x-grid3-body .x-grid3-td-numberer {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid3-special-col-bg.gif);
+    background-image:url(../images/default/grid/grid3-special-col-bg.gif);
 }
 
 .x-grid3-body .x-grid3-td-numberer .x-grid3-cell-inner {
@@ -5853,21 +6060,21 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-grid3-body .x-grid3-td-row-icon {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid3-special-col-bg.gif);
+    background-image:url(../images/default/grid/grid3-special-col-bg.gif);
 }
 
 .x-grid3-body .x-grid3-row-selected .x-grid3-td-numberer,
 .x-grid3-body .x-grid3-row-selected .x-grid3-td-checker,
 .x-grid3-body .x-grid3-row-selected .x-grid3-td-expander {
-	background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid3-special-col-sel-bg.gif);
+	background-image:url(../images/default/grid/grid3-special-col-sel-bg.gif);
 }
 
 .x-grid3-check-col {
-	background-image:url(++resource++collective.js.extjs-resources/images/default/menu/unchecked.gif);
+	background-image:url(../images/default/menu/unchecked.gif);
 }
 
 .x-grid3-check-col-on {
-	background-image:url(++resource++collective.js.extjs-resources/images/default/menu/checked.gif);
+	background-image:url(../images/default/menu/checked.gif);
 }
 
 .x-grid-group, .x-grid-group-body, .x-grid-group-hd {
@@ -5879,30 +6086,30 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-grid-group-hd div.x-grid-group-title {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/group-collapse.gif);
+    background-image:url(../images/default/grid/group-collapse.gif);
     color:#3764a0;
-    
+    font:bold 11px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-grid-group-collapsed .x-grid-group-hd div.x-grid-group-title {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/group-expand.gif);
+    background-image:url(../images/default/grid/group-expand.gif);
 }
 
 .x-group-by-icon {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/group-by.gif);
+    background-image:url(../images/default/grid/group-by.gif);
 }
 
 .x-cols-icon {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/columns.gif);
+    background-image:url(../images/default/grid/columns.gif);
 }
 
 .x-show-groups-icon {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/group-by.gif);
+    background-image:url(../images/default/grid/group-by.gif);
 }
 
 .x-grid-empty {
     color:gray;
-    
+    font:normal 11px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-grid-with-col-lines .x-grid3-row td.x-grid3-cell {
@@ -5911,41 +6118,64 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-grid-with-col-lines .x-grid3-row-selected {
 	border-top-color:#a3bae9;
-}.x-dd-drag-ghost{
+}.x-pivotgrid .x-grid3-header-offset table td {
+    background: url(../images/default/grid/grid3-hrow.gif) repeat-x 50% 100%;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-left-color: #EEE;
+    border-right-color: #D0D0D0;
+}
+
+.x-pivotgrid .x-grid3-row-headers {
+    background-color: #f9f9f9;
+}
+
+.x-pivotgrid .x-grid3-row-headers table td {
+    background: #EEE url(../images/default/grid/grid3-rowheader.gif) repeat-x left top;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-left-color: #EEE;
+    border-right-color: #D0D0D0;
+    border-bottom: 1px solid;
+    border-bottom-color: #D0D0D0;
+    height: 18px;
+}
+.x-dd-drag-ghost{
 	color:#000;
+	font: normal 11px arial, helvetica, sans-serif;
     border-color: #ddd #bbb #bbb #ddd;
 	background-color:#fff;
 }
 
 .x-dd-drop-nodrop .x-dd-drop-icon{
-  background-image: url(++resource++collective.js.extjs-resources/images/default/dd/drop-no.gif);
+  background-image: url(../images/default/dd/drop-no.gif);
 }
 
 .x-dd-drop-ok .x-dd-drop-icon{
-  background-image: url(++resource++collective.js.extjs-resources/images/default/dd/drop-yes.gif);
+  background-image: url(../images/default/dd/drop-yes.gif);
 }
 
 .x-dd-drop-ok-add .x-dd-drop-icon{
-  background-image: url(++resource++collective.js.extjs-resources/images/default/dd/drop-add.gif);
+  background-image: url(../images/default/dd/drop-add.gif);
 }
 
 .x-view-selector {
     background-color:#c3daf9;
     border-color:#3399bb;
 }.x-tree-node-expanded .x-tree-node-icon{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/folder-open.gif);
+	background-image:url(../images/default/tree/folder-open.gif);
 }
 
 .x-tree-node-leaf .x-tree-node-icon{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/leaf.gif);
+	background-image:url(../images/default/tree/leaf.gif);
 }
 
 .x-tree-node-collapsed .x-tree-node-icon{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/folder.gif);
+	background-image:url(../images/default/tree/folder.gif);
 }
 
 .x-tree-node-loading .x-tree-node-icon{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/loading.gif) !important;
+	background-image:url(../images/default/tree/loading.gif) !important;
 }
 
 .x-tree-node .x-tree-node-inline-icon {
@@ -5958,67 +6188,68 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-tree-lines .x-tree-elbow{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow.gif);
+	background-image:url(../images/default/tree/elbow.gif);
 }
 
 .x-tree-lines .x-tree-elbow-plus{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow-plus.gif);
+	background-image:url(../images/default/tree/elbow-plus.gif);
 }
 
 .x-tree-lines .x-tree-elbow-minus{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow-minus.gif);
+	background-image:url(../images/default/tree/elbow-minus.gif);
 }
 
 .x-tree-lines .x-tree-elbow-end{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow-end.gif);
+	background-image:url(../images/default/tree/elbow-end.gif);
 }
 
 .x-tree-lines .x-tree-elbow-end-plus{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow-end-plus.gif);
+	background-image:url(../images/default/tree/elbow-end-plus.gif);
 }
 
 .x-tree-lines .x-tree-elbow-end-minus{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow-end-minus.gif);
+	background-image:url(../images/default/tree/elbow-end-minus.gif);
 }
 
 .x-tree-lines .x-tree-elbow-line{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow-line.gif);
+	background-image:url(../images/default/tree/elbow-line.gif);
 }
 
 .x-tree-no-lines .x-tree-elbow-plus{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow-plus-nl.gif);
+	background-image:url(../images/default/tree/elbow-plus-nl.gif);
 }
 
 .x-tree-no-lines .x-tree-elbow-minus{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow-minus-nl.gif);
+	background-image:url(../images/default/tree/elbow-minus-nl.gif);
 }
 
 .x-tree-no-lines .x-tree-elbow-end-plus{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow-end-plus-nl.gif);
+	background-image:url(../images/default/tree/elbow-end-plus-nl.gif);
 }
 
 .x-tree-no-lines .x-tree-elbow-end-minus{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/tree/elbow-end-minus-nl.gif);
+	background-image:url(../images/default/tree/elbow-end-minus-nl.gif);
 }
 
 .x-tree-arrows .x-tree-elbow-plus{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/tree/arrows.gif);
+    background-image:url(../images/default/tree/arrows.gif);
 }
 
 .x-tree-arrows .x-tree-elbow-minus{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/tree/arrows.gif);
+    background-image:url(../images/default/tree/arrows.gif);
 }
 
 .x-tree-arrows .x-tree-elbow-end-plus{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/tree/arrows.gif);
+    background-image:url(../images/default/tree/arrows.gif);
 }
 
 .x-tree-arrows .x-tree-elbow-end-minus{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/tree/arrows.gif);
+    background-image:url(../images/default/tree/arrows.gif);
 }
 
 .x-tree-node{
 	color:#000;
+	font: normal 11px arial, tahoma, helvetica, sans-serif;
 }
 
 .x-tree-node a, .x-dd-drag-ghost a{
@@ -6063,26 +6294,26 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-tree-drop-ok-append .x-dd-drop-icon{
-  background-image: url(++resource++collective.js.extjs-resources/images/default/tree/drop-add.gif);
+  background-image: url(../images/default/tree/drop-add.gif);
 }
 
 .x-tree-drop-ok-above .x-dd-drop-icon{
-  background-image: url(++resource++collective.js.extjs-resources/images/default/tree/drop-over.gif);
+  background-image: url(../images/default/tree/drop-over.gif);
 }
 
 .x-tree-drop-ok-below .x-dd-drop-icon{
-  background-image: url(++resource++collective.js.extjs-resources/images/default/tree/drop-under.gif);
+  background-image: url(../images/default/tree/drop-under.gif);
 }
 
 .x-tree-drop-ok-between .x-dd-drop-icon{
-  background-image: url(++resource++collective.js.extjs-resources/images/default/tree/drop-between.gif);
+  background-image: url(../images/default/tree/drop-between.gif);
 }.x-date-picker {
     border-color: #1b376c;
     background-color:#fff;
 }
 
 .x-date-middle,.x-date-left,.x-date-right {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/shared/hd-sprite.gif);
+	background-image: url(../images/default/shared/hd-sprite.gif);
 	color:#fff;
 	font:bold 11px "sans serif", tahoma, verdana, helvetica;
 }
@@ -6092,21 +6323,22 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-date-middle .x-btn-mc em.x-btn-arrow {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/toolbar/btn-arrow-light.gif);
+    background-image:url(../images/default/toolbar/btn-arrow-light.gif);
 }
 
 .x-date-right a {
-    background-image: url(++resource++collective.js.extjs-resources/images/default/shared/right-btn.gif);
+    background-image: url(../images/default/shared/right-btn.gif);
 }
 
 .x-date-left a{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/shared/left-btn.gif);
+	background-image: url(../images/default/shared/left-btn.gif);
 }
 
 .x-date-inner th {
     background-color:#dfecfb;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/shared/glass-bg.gif);
+    background-image:url(../images/default/shared/glass-bg.gif);
 	border-bottom-color:#a3bad9;
+    font:normal 10px arial, helvetica,tahoma,sans-serif;
 	color:#233d6d;
 }
 
@@ -6115,7 +6347,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-date-inner a {
-    
+    font:normal 11px arial, helvetica,tahoma,sans-serif;
     color:#000;
 }
 
@@ -6125,7 +6357,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 
 .x-date-inner .x-date-selected a{
     background-color:#dfecfb;
-	background-image:url(++resource++collective.js.extjs-resources/images/default/shared/glass-bg.gif);
+	background-image:url(../images/default/shared/glass-bg.gif);
 	border-color:#8db2e3;
 }
 
@@ -6144,7 +6376,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-date-bottom {
     border-top-color:#a3bad9;
     background-color:#dfecfb;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/shared/glass-bg.gif);
+    background-image:url(../images/default/shared/glass-bg.gif);
 }
 
 .x-date-inner a:hover, .x-date-inner .x-date-disabled a:hover{
@@ -6171,19 +6403,19 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-date-mp td {
-	
+	font:normal 11px arial, helvetica,tahoma,sans-serif;
 }
 
 .x-date-mp-btns button {
 	background-color:#083772;
 	color:#fff;
 	border-color: #3366cc #000055 #000055 #3366cc;
-	
+	font:normal 11px arial, helvetica,tahoma,sans-serif;
 }
 
 .x-date-mp-btns {
     background-color: #dfecfb;
-	background-image: url(++resource++collective.js.extjs-resources/images/default/shared/glass-bg.gif);
+	background-image: url(../images/default/shared/glass-bg.gif);
 }
 
 .x-date-mp-btns td {
@@ -6201,52 +6433,56 @@ td.x-date-mp-month a:hover,td.x-date-mp-year a:hover {
 
 td.x-date-mp-sel a {
     background-color: #dfecfb;
-	background-image: url(++resource++collective.js.extjs-resources/images/default/shared/glass-bg.gif);
+	background-image: url(../images/default/shared/glass-bg.gif);
 	border-color:#8db2e3;
 }
 
 .x-date-mp-ybtn a {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/panel/tool-sprites.gif);
+    background-image:url(../images/default/panel/tool-sprites.gif);
 }
 
 td.x-date-mp-sep {
    border-right-color:#c5d2df;
 }.x-tip .x-tip-close{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/qtip/close.gif);
+	background-image: url(../images/default/qtip/close.gif);
 }
 
 .x-tip .x-tip-tc, .x-tip .x-tip-tl, .x-tip .x-tip-tr, .x-tip .x-tip-bc, .x-tip .x-tip-bl, .x-tip .x-tip-br, .x-tip .x-tip-ml, .x-tip .x-tip-mr {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/qtip/tip-sprite.gif);
+	background-image: url(../images/default/qtip/tip-sprite.gif);
 }
 
+.x-tip .x-tip-mc {
+    font: normal 11px tahoma,arial,helvetica,sans-serif;
+}
 .x-tip .x-tip-ml {
 	background-color: #fff;
 }
 
 .x-tip .x-tip-header-text {
+    font: bold 11px tahoma,arial,helvetica,sans-serif;
     color:#444;
 }
 
 .x-tip .x-tip-body {
-    
+    font: normal 11px tahoma,arial,helvetica,sans-serif;
     color:#444;
 }
 
 .x-form-invalid-tip .x-tip-tc, .x-form-invalid-tip .x-tip-tl, .x-form-invalid-tip .x-tip-tr, .x-form-invalid-tip .x-tip-bc,
 .x-form-invalid-tip .x-tip-bl, .x-form-invalid-tip .x-tip-br, .x-form-invalid-tip .x-tip-ml, .x-form-invalid-tip .x-tip-mr
 {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/form/error-tip-corners.gif);
+	background-image: url(../images/default/form/error-tip-corners.gif);
 }
 
 .x-form-invalid-tip .x-tip-body {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/form/exclamation.gif);
+    background-image:url(../images/default/form/exclamation.gif);
 }
 
 .x-tip-anchor {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/qtip/tip-anchor-sprite.gif);
+    background-image:url(../images/default/qtip/tip-anchor-sprite.gif);
 }.x-menu {
     background-color:#f0f0f0;
-	background-image:url(++resource++collective.js.extjs-resources/images/default/menu/menu.gif);
+	background-image:url(../images/default/menu/menu.gif);
 }
 
 .x-menu-floating{
@@ -6257,8 +6493,12 @@ td.x-date-mp-sep {
 	background-image:none;
 }
 
+.x-menu-list-item{
+	font:normal 11px arial,tahoma,sans-serif;
+}
+
 .x-menu-item-arrow{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/menu/menu-parent.gif);
+	background-image:url(../images/default/menu/menu-parent.gif);
 }
 
 .x-menu-sep {
@@ -6271,7 +6511,7 @@ a.x-menu-item {
 }
 
 .x-menu-item-active {
-    background-image: url(++resource++collective.js.extjs-resources/images/default/menu/item-over.gif);
+    background-image: url(../images/default/menu/item-over.gif);
 	background-color: #dbecf4;
     border-color:#aaccf6;
 }
@@ -6281,15 +6521,15 @@ a.x-menu-item {
 }
 
 .x-menu-check-item .x-menu-item-icon{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/menu/unchecked.gif);
+	background-image:url(../images/default/menu/unchecked.gif);
 }
 
 .x-menu-item-checked .x-menu-item-icon{
-	background-image:url(++resource++collective.js.extjs-resources/images/default/menu/checked.gif);
+	background-image:url(../images/default/menu/checked.gif);
 }
 
 .x-menu-item-checked .x-menu-group-item .x-menu-item-icon{
-    background-image:url(++resource++collective.js.extjs-resources/images/default/menu/group-checked.gif);
+    background-image:url(../images/default/menu/group-checked.gif);
 }
 
 .x-menu-group-item .x-menu-item-icon{
@@ -6315,31 +6555,32 @@ a.x-menu-item {
 }
 
 .x-menu-scroller-top {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/layout/mini-top.gif);
+    background-image:url(../images/default/layout/mini-top.gif);
 }
 
 .x-menu-scroller-bottom {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/layout/mini-bottom.gif);
+    background-image:url(../images/default/layout/mini-bottom.gif);
 }
 .x-box-tl {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/corners.gif);
+	background-image: url(../images/default/box/corners.gif);
 }
 
 .x-box-tc {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/tb.gif);
+	background-image: url(../images/default/box/tb.gif);
 }
 
 .x-box-tr {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/corners.gif);
+	background-image: url(../images/default/box/corners.gif);
 }
 
 .x-box-ml {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/l.gif);
+	background-image: url(../images/default/box/l.gif);
 }
 
 .x-box-mc {
 	background-color: #eee;
-    background-image: url(++resource++collective.js.extjs-resources/images/default/box/tb.gif);
+    background-image: url(../images/default/box/tb.gif);
+	font-family: "Myriad Pro","Myriad Web","Tahoma","Helvetica","Arial",sans-serif;
 	color: #393939;
 	font-size: 12px;
 }
@@ -6350,27 +6591,27 @@ a.x-menu-item {
 }
 
 .x-box-mr {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/r.gif);
+	background-image: url(../images/default/box/r.gif);
 }
 
 .x-box-bl {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/corners.gif);
+	background-image: url(../images/default/box/corners.gif);
 }
 
 .x-box-bc {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/tb.gif);
+	background-image: url(../images/default/box/tb.gif);
 }
 
 .x-box-br {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/corners.gif);
+	background-image: url(../images/default/box/corners.gif);
 }
 
 .x-box-blue .x-box-bl, .x-box-blue .x-box-br, .x-box-blue .x-box-tl, .x-box-blue .x-box-tr {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/corners-blue.gif);
+	background-image: url(../images/default/box/corners-blue.gif);
 }
 
 .x-box-blue .x-box-bc, .x-box-blue .x-box-mc, .x-box-blue .x-box-tc {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/tb-blue.gif);
+	background-image: url(../images/default/box/tb-blue.gif);
 }
 
 .x-box-blue .x-box-mc {
@@ -6382,15 +6623,15 @@ a.x-menu-item {
 }
 
 .x-box-blue .x-box-ml {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/l-blue.gif);
+	background-image: url(../images/default/box/l-blue.gif);
 }
 
 .x-box-blue .x-box-mr {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/box/r-blue.gif);
+	background-image: url(../images/default/box/r-blue.gif);
 }.x-combo-list {
     border-color:#98c0f4;
     background-color:#ddecfe;
-    
+    font:normal 12px tahoma, arial, helvetica, sans-serif;
 }
 
 .x-combo-list-inner {
@@ -6398,9 +6639,9 @@ a.x-menu-item {
 }
 
 .x-combo-list-hd {
-    
+    font:bold 11px tahoma, arial, helvetica, sans-serif;
     color:#15428b;
-    background-image: url(++resource++collective.js.extjs-resources/images/default/layout/panel-title-light-bg.gif);
+    background-image: url(../images/default/layout/panel-title-light-bg.gif);
     border-bottom-color:#98c0f4;
 }
 
@@ -6421,7 +6662,9 @@ a.x-menu-item {
     border-top-color:#98c0f4;
 }
 
-.x-panel {
+.x-combo-list-small {
+    font:normal 11px tahoma, arial, helvetica, sans-serif;
+}.x-panel {
     border-color: #99bbe8;
 }
 
@@ -6429,9 +6672,9 @@ a.x-menu-item {
     color:#15428b;
 	font-weight:bold; 
     font-size: 11px;
-    
+    font-family: tahoma,arial,verdana,sans-serif;
     border-color:#99bbe8;
-    background-image: url(++resource++collective.js.extjs-resources/images/default/panel/white-top-bottom.gif);
+    background-image: url(../images/default/panel/white-top-bottom.gif);
 }
 
 .x-panel-body {
@@ -6453,38 +6696,38 @@ a.x-menu-item {
 
 .x-panel-tl .x-panel-header {
     color:#15428b;
-	
+	font:bold 11px tahoma,arial,verdana,sans-serif;
 }
 
 .x-panel-tc {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/panel/top-bottom.gif);
+	background-image: url(../images/default/panel/top-bottom.gif);
 }
 
 .x-panel-tl, .x-panel-tr, .x-panel-bl,  .x-panel-br{
-	background-image: url(++resource++collective.js.extjs-resources/images/default/panel/corners-sprite.gif);
+	background-image: url(../images/default/panel/corners-sprite.gif);
     border-bottom-color:#99bbe8;
 }
 
 .x-panel-bc {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/panel/top-bottom.gif);
+	background-image: url(../images/default/panel/top-bottom.gif);
 }
 
 .x-panel-mc {
-    
+    font: normal 11px tahoma,arial,helvetica,sans-serif;
     background-color:#dfe8f6;
 }
 
 .x-panel-ml {
 	background-color: #fff;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/panel/left-right.gif);
+    background-image:url(../images/default/panel/left-right.gif);
 }
 
 .x-panel-mr {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/panel/left-right.gif);
+	background-image: url(../images/default/panel/left-right.gif);
 }
 
 .x-tool {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/panel/tool-sprites.gif);
+    background-image:url(../images/default/panel/tool-sprites.gif);
 }
 
 .x-panel-ghost {
@@ -6499,6 +6742,9 @@ a.x-menu-item {
     border-color:#99bbe8;
 }
 
+.x-panel-fbar td,.x-panel-fbar span,.x-panel-fbar input,.x-panel-fbar div,.x-panel-fbar select,.x-panel-fbar label{
+    font:normal 11px arial,tahoma, helvetica, sans-serif;
+}
 .x-window-proxy {
     background-color:#c7dffc;
     border-color:#99bbe8;
@@ -6506,45 +6752,45 @@ a.x-menu-item {
 
 .x-window-tl .x-window-header {
     color:#15428b;
-	
+	font:bold 11px tahoma,arial,verdana,sans-serif;
 }
 
 .x-window-tc {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/window/top-bottom.png);
+	background-image: url(../images/default/window/top-bottom.png);
 }
 
 .x-window-tl {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/window/left-corners.png);
+	background-image: url(../images/default/window/left-corners.png);
 }
 
 .x-window-tr {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/window/right-corners.png);
+	background-image: url(../images/default/window/right-corners.png);
 }
 
 .x-window-bc {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/window/top-bottom.png);
+	background-image: url(../images/default/window/top-bottom.png);
 }
 
 .x-window-bl {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/window/left-corners.png);
+	background-image: url(../images/default/window/left-corners.png);
 }
 
 .x-window-br {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/window/right-corners.png);
+	background-image: url(../images/default/window/right-corners.png);
 }
 
 .x-window-mc {
     border-color:#99bbe8;
-    
+    font: normal 11px tahoma,arial,helvetica,sans-serif;
     background-color:#dfe8f6;
 }
 
 .x-window-ml {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/window/left-right.png);
+	background-image: url(../images/default/window/left-right.png);
 }
 
 .x-window-mr {
-	background-image: url(++resource++collective.js.extjs-resources/images/default/window/left-right.png);
+	background-image: url(../images/default/window/left-right.png);
 }
 
 .x-window-maximized .x-window-tc {
@@ -6583,7 +6829,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
     background-color:#fff;
 }
 .x-html-editor-tb .x-btn-text {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/editor/tb-sprite.gif);
+    background-image:url(../images/default/editor/tb-sprite.gif);
 }.x-panel-noborder .x-panel-header-noborder {
     border-bottom-color:#99bbe8;
 }
@@ -6609,7 +6855,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-accordion-hd {
 	color:#222;
     font-weight:normal;
-    background-image: url(++resource++collective.js.extjs-resources/images/default/panel/light-hd.gif);
+    background-image: url(../images/default/panel/light-hd.gif);
 }
 
 .x-layout-collapsed{
@@ -6622,44 +6868,44 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 
 .x-layout-split-west .x-layout-mini {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/layout/mini-left.gif);
+    background-image:url(../images/default/layout/mini-left.gif);
 }
 .x-layout-split-east .x-layout-mini {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/layout/mini-right.gif);
+    background-image:url(../images/default/layout/mini-right.gif);
 }
 .x-layout-split-north .x-layout-mini {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/layout/mini-top.gif);
+    background-image:url(../images/default/layout/mini-top.gif);
 }
 .x-layout-split-south .x-layout-mini {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/layout/mini-bottom.gif);
+    background-image:url(../images/default/layout/mini-bottom.gif);
 }
 
 .x-layout-cmini-west .x-layout-mini {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/layout/mini-right.gif);
+    background-image:url(../images/default/layout/mini-right.gif);
 }
 
 .x-layout-cmini-east .x-layout-mini {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/layout/mini-left.gif);
+    background-image:url(../images/default/layout/mini-left.gif);
 }
 
 .x-layout-cmini-north .x-layout-mini {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/layout/mini-bottom.gif);
+    background-image:url(../images/default/layout/mini-bottom.gif);
 }
 
 .x-layout-cmini-south .x-layout-mini {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/layout/mini-top.gif);
+    background-image:url(../images/default/layout/mini-top.gif);
 }.x-progress-wrap {
     border-color:#6593cf;
 }
 
 .x-progress-inner {
     background-color:#e0e8f3;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/qtip/bg.gif);
+    background-image:url(../images/default/qtip/bg.gif);
 }
 
 .x-progress-bar {
     background-color:#9cbfee;
-    background-image:url(++resource++collective.js.extjs-resources/images/default/progress/progress-bg.gif);
+    background-image:url(../images/default/progress/progress-bg.gif);
     border-top-color:#d1e4fd;
     border-bottom-color:#7fa9e4;
     border-right-color:#7fa9e4;
@@ -6675,14 +6921,17 @@ body.x-body-masked .x-window-plain .x-window-mc {
     color:#396095;
 }.x-list-header{
     background-color:#f9f9f9;
-	background-image:url(++resource++collective.js.extjs-resources/images/default/grid/grid3-hrow.gif);
+	background-image:url(../images/default/grid/grid3-hrow.gif);
 }
 
 .x-list-header-inner div em {
     border-left-color:#ddd;
-    
+    font:normal 11px arial, tahoma, helvetica, sans-serif;
 }
 
+.x-list-body dt em {
+    font:normal 11px arial, tahoma, helvetica, sans-serif;
+}
 
 .x-list-over {
     background-color:#eee;
@@ -6698,43 +6947,47 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 
 .x-list-header-inner em.sort-asc, .x-list-header-inner em.sort-desc {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/sort-hd.gif);
+    background-image:url(../images/default/grid/sort-hd.gif);
     border-color: #99bbe8;
 }.x-slider-horz, .x-slider-horz .x-slider-end, .x-slider-horz .x-slider-inner {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/slider/slider-bg.png);
+    background-image:url(../images/default/slider/slider-bg.png);
 }
 
 .x-slider-horz .x-slider-thumb {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/slider/slider-thumb.png);
+    background-image:url(../images/default/slider/slider-thumb.png);
 }
 
 .x-slider-vert, .x-slider-vert .x-slider-end, .x-slider-vert .x-slider-inner {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/slider/slider-v-bg.png);
+    background-image:url(../images/default/slider/slider-v-bg.png);
 }
 
 .x-slider-vert .x-slider-thumb {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/slider/slider-v-thumb.png);
+    background-image:url(../images/default/slider/slider-v-thumb.png);
 }.x-window-dlg .ext-mb-text,
 .x-window-dlg .x-window-header-text {
     font-size:12px;
 }
 
+.x-window-dlg .ext-mb-textarea {
+    font:normal 12px tahoma,arial,helvetica,sans-serif;
+}
+
 .x-window-dlg .x-msg-box-wait {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/grid/loading.gif);
+    background-image:url(../images/default/grid/loading.gif);
 }
 
 .x-window-dlg .ext-mb-info {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/window/icon-info.gif);
+    background-image:url(../images/default/window/icon-info.gif);
 }
 
 .x-window-dlg .ext-mb-warning {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/window/icon-warning.gif);
+    background-image:url(../images/default/window/icon-warning.gif);
 }
 
 .x-window-dlg .ext-mb-question {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/window/icon-question.gif);
+    background-image:url(../images/default/window/icon-question.gif);
 }
 
 .x-window-dlg .ext-mb-error {
-    background-image:url(++resource++collective.js.extjs-resources/images/default/window/icon-error.gif);
+    background-image:url(../images/default/window/icon-error.gif);
 }
