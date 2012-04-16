@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1 (unreleased)
+1.1 (2012-04-16)
 ----------------
 
 - Update to extjs v3.4 for ie9 compatibilities.
