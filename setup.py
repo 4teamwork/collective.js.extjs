@@ -5,7 +5,7 @@ version = '1.2.dev0'
 
 setup(name='collective.js.extjs',
       version=version,
-      description='ExtJS integration for Plone.',
+      description='Ext JS 3.4 integration for Plone.',
 
       long_description=(
         open('README.rst').read() + '\n' +
