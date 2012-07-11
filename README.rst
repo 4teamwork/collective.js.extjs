@@ -3,9 +3,9 @@ collective.js.extjs
 
 This package integrates the `Ext JS 3`_ library into Plone.
 
-It provides
+It provides:
 
-- a resource directory (``++resource++collective.js.extjs-resources``)
+- a resource directory (``++resource++collective.js.extjs-resources/``)
 - a jquery adapter resource (``++resource++ext-jquery-adapter.js``)
 - a generic setup profile, registering JavaScript and CSS to the portal registry.
 
