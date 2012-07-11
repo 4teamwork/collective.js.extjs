@@ -8,7 +8,7 @@ setup(name='collective.js.extjs',
       description='ExtJS integration for Plone.',
 
       long_description=(
-        open('README.txt').read() + '\n' +
+        open('README.rst').read() + '\n' +
         open(os.path.join('docs', 'HISTORY.txt')).read()),
 
       # Get more strings from
