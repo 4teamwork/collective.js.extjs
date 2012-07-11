@@ -2,33 +2,41 @@ from setuptools import setup, find_packages
 import os
 
 version = '1.2.dev0'
-maintainer = 'Victor baumann'
 
 setup(name='collective.js.extjs',
       version=version,
-      description="Ext JS Cross-Browser Rich Internet Application Framework \
-        (Maintainer: %s)" % maintainer,
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
+      description='ExtJS integration for Plone.',
+
+      long_description=(
+        open('README.txt').read() + '\n' +
+        open(os.path.join('docs', 'HISTORY.txt')).read()),
+
+      # Get more strings from
+      # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Programming Language :: Python",
+        'Programming Language :: Python',
+        'Framework :: Plone',
+        'Framework :: Plone :: 4.1',
+        'Framework :: Plone :: 4.2',
         ],
-      keywords='',
-      author='%s, 4teamwork GmbH'  % maintainer,
+
+      keywords='extjs plone',
+      author='4teamwork GmbH',
       author_email='mailto:info@4teamwork.ch',
-      maintainer=maintainer,
-      url='http://www.sencha.com/products/js/',
+      url='https://github.com/4teamwork/collective.js.extjs',
       license='GPL2',
+
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['collective', 'collective.js'],
       include_package_data=True,
       zip_safe=False,
+
       install_requires=[
-          'setuptools',
-          # -*- Extra requirements: -*-
-      ],
-      entry_points="""
+        'setuptools',
+        # -*- Extra requirements: -*-
+        ],
+
+      entry_points='''
       # -*- Entry points: -*-
-      """,
+      ''',
       )
