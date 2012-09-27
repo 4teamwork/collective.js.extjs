@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2 (unreleased)
+1.2 (2012-09-27)
 ----------------
 
 - Add z3c.autoinclude entry point (target=plone).
