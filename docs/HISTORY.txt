@@ -5,6 +5,9 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- Prepare for public release.
+  [jone]
+
 - Move package to github and clean it up.
   [jone]
 
