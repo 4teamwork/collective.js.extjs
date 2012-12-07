@@ -1,8 +1,8 @@
 /*!
- * Ext JS Library 3.4.0
- * Copyright(c) 2006-2011 Sencha Inc.
- * licensing@sencha.com
- * http://www.sencha.com/license
+ * Ext JS Library 3.0+
+ * Copyright(c) 2006-2009 Ext JS, LLC
+ * licensing@extjs.com
+ * http://www.extjs.com/license
  */
 Ext.namespace('Ext.ux.grid');
 
@@ -181,7 +181,6 @@ Ext.ux.grid.GridFilters = Ext.extend(Ext.util.Observable, {
 
     /** @private */
     constructor : function (config) {
-        config = config || {};
         this.deferredUpdate = new Ext.util.DelayedTask(this.reload, this);
         this.filters = new Ext.util.MixedCollection();
         this.filters.getKey = function (o) {
@@ -198,10 +197,6 @@ Ext.ux.grid.GridFilters = Ext.extend(Ext.util.Observable, {
             this.grid = grid;
 
             this.bindStore(this.grid.getStore(), true);
-            // assumes no filters were passed in the constructor, so try and use ones from the colModel
-            if(this.filters.getCount() == 0){
-                this.addFilters(this.grid.getColumnModel());
-            }
 
             this.grid.filters = this;
 
@@ -255,7 +250,6 @@ Ext.ux.grid.GridFilters = Ext.extend(Ext.util.Observable, {
             this.reload();
         }
         delete this.applyingState;
-        delete state.filters;
     },
 
     /**
@@ -481,11 +475,14 @@ TODO: lazy rendering
      */
     updateColumnHeadings : function () {
         var view = this.grid.getView(),
-            i, len, filter;
+            hds, i, len, filter;
         if (view.mainHd) {
+            hds = view.mainHd.select('td').removeClass(this.filterCls);
             for (i = 0, len = view.cm.config.length; i < len; i++) {
                 filter = this.getFilter(view.cm.config[i].dataIndex);
-                Ext.fly(view.getHeaderCell(i))[filter && filter.active ? 'addClass' : 'removeClass'](this.filterCls);
+                if (filter && filter.active) {
+                    hds.item(i).addClass(this.filterCls);
+                }
             }
         }
     },
@@ -572,7 +569,7 @@ TODO: lazy rendering
                         // filter type is specified in order of preference:
                         //     filter type specified in config
                         //     type specified in store's field's type config
-                        filter.type = filter.type || this.store.fields.get(dI).type.type;
+                        filter.type = filter.type || this.store.fields.get(dI).type;
                     }
                 } else {
                     filter = filters[i];
@@ -654,7 +651,7 @@ filters[0][data][value]="someValue3"&
      * </ul></div>
      * Override this method to customize the format of the filter query for remote requests.
      * @param {Array} filters A collection of objects representing active filters and their configuration.
-     *    Each element will take the form of {field: dataIndex, data: filterConf}. dataIndex is not assured
+     * 	  Each element will take the form of {field: dataIndex, data: filterConf}. dataIndex is not assured
      *    to be unique as any one filter may be a composite of more basic filters for the same dataIndex.
      * @return {Object} Query keys and values
      */
@@ -727,9 +724,6 @@ filters[0][data][value]="someValue3"&
             case 'int':
             case 'float':
               type = 'numeric';
-              break;
-            case 'bool':
-              type = 'boolean';
               break;
         }
         return Ext.ux.grid.filter[type.substr(0, 1).toUpperCase() + type.substr(1) + 'Filter'];

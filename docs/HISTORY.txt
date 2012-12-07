@@ -5,6 +5,9 @@ Changelog
 1.3 (unreleased)
 ----------------
 
+- Update grid filters.
+  [jone]
+
 - Add a generic setup profile ``grid-filter`` which registers the necessary
   resources (JS / CSS) for using the ExtJS grid filter plugin.
   [jone]
