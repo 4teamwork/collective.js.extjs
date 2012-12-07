@@ -211,6 +211,14 @@ Ext.ux.grid.filter.DateFilter = Ext.extend(Ext.ux.grid.filter.Filter, {
      */
     setValue : function (value, preserve) {
         var key;
+        /* collective.js.extjs : convert to dates if value is string */
+        for (key in value) {
+            if (typeof(value[key].format) == 'undefined') {
+                value[key] = new Date(value[key]);
+            }
+        }
+        /* / collective.js.extjs : convert to dates if value is string */
+
         for (key in this.fields) {
             if(value[key]){
                 this.fields[key].menu.picker.setValue(value[key]);
