@@ -29,4 +29,8 @@
         name="ext-jquery-adapter.js"
         file="adapter/jquery/ext-jquery-adapter.js" />
 
+    <browser:resource
+        name="ext-jquery-adapter-debug.js"
+        file="adapter/jquery/ext-jquery-adapter-debug.js" />
+
 </configure>
