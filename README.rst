@@ -26,6 +26,12 @@ Usage
 - Install the generic setup profile.
 
 
+Compatibility
+-------------
+
+Runs with `Plone <http://www.plone.org/>`_ `4.1`, `4.2`.
+
+
 Links
 =====
 
