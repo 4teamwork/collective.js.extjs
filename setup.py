@@ -21,7 +21,7 @@ setup(name='collective.js.extjs',
         ],
 
       keywords='extjs plone',
-      author='4teamwork GmbH',
+      author='4teamwork AG',
       author_email='mailto:info@4teamwork.ch',
       url='https://github.com/4teamwork/collective.js.extjs',
       license='GPL2',
