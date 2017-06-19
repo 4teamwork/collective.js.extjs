@@ -11,7 +11,7 @@ Changelog
 1.4.0 (2017-06-19)
 ------------------
 
-- Patch `testPlayerVersion` to no create any object tag to test the flash version.
+- Patch `testPlayerVersion` to not create any object tag to test the flash version.
   [mathias.leimgruber]
 
 - Undo prev. release 1.3.0, since it may break exjts table.
