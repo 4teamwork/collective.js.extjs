@@ -5,13 +5,17 @@ Changelog
 1.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Patch `testPlayerVersion` to no create any object tag to test the flash version.
+  [mathias.leimgruber]
+
+- Undo prev. release 1.3.0, since it may break exjts table.
+  [mathias.leimgruber]
 
 
 1.3.0 (2017-06-15)
 ------------------
 
-- Remove swfupload integration for legazy browser.
+- Remove swfobject.
   [mathias.leimgruber]
 
 
