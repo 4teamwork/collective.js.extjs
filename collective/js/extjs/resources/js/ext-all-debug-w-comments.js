@@ -57395,6 +57395,8 @@ var swfobject = function() {
         - Disadvantage of this method is that it depends on the availability of the DOM, while the plugins collection is immediately available
     */
     function testPlayerVersion() {
+        // Disable flash integration - such old Browsers are no longer supported
+        return;
         var b = doc.getElementsByTagName("body")[0];
         var o = createElement(OBJECT);
         o.setAttribute("type", FLASH_MIME_TYPE);

@@ -37384,6 +37384,7 @@ var swfobject = function() {
     
     
     function testPlayerVersion() {
+        return;
         var b = doc.getElementsByTagName("body")[0];
         var o = createElement(OBJECT);
         o.setAttribute("type", FLASH_MIME_TYPE);
